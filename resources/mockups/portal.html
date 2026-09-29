@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="js/tailwind-config.js"></script>
+<script src="js/main.js" defer></script>
+<script src="js/portal.js" defer></script>
+</head><body class="bg-background font-body-md text-on-surface antialiased">
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden transition-opacity"></div>
+<aside id="app-sidebar" class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant/30 z-50 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+<div class="flex flex-col">
+<div class="h-16 px-space-md border-b border-outline-variant/30 flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<img alt="Kas Kelas Logo" class="h-8 w-8 object-contain shrink-0" src="logo.svg"/>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary truncate leading-tight font-semibold">Kas Kelas</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed/30 px-1.5 py-0.5 rounded">XII IPA 2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">TA 2024</span>
+</div>
+</div>
+</div>
+<button id="mobile-sidebar-close" class="lg:hidden p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button" aria-label="Tutup Menu">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-1 p-space-sm" data-active-classes="bg-primary-container text-on-primary font-label-lg rounded-lg shadow-sm">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="dashboard-admin" href="dashboard.html">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="data-siswa" href="siswa.html">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span>Data Siswa</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="pembayaran-kas" href="pembayaran.html">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Pembayaran Kas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="pemasukan" href="pemasukan.html">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span>Pemasukan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="pengeluaran" href="pengeluaran.html">
+<span class="material-symbols-outlined text-[20px]">trending_down</span>
+<span>Pengeluaran</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="laporan-keuangan" href="laporan.html">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span>Laporan Keuangan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="portal-siswa" href="portal.html">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+<span>Portal Siswa</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="pengaturan" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Pengaturan</span>
+</a>
+</nav>
+</div>
+<div class="p-space-sm border-t border-outline-variant/30 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-3 py-1.5 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Online Kas Aktif</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">v1.2</span>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-lg text-label-lg text-error hover:bg-error-container/40 hover:text-on-error-container transition-colors" data-path="login" href="login.html">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span>Keluar Akun</span>
+</a>
+</div>
+</aside>
+<div class="lg:pl-[260px] min-h-screen flex flex-col">
+<header class="fixed top-0 left-0 lg:left-[260px] right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/40 z-30">
+<div class="h-16 w-full px-4 lg:px-space-lg flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-2 sm:gap-space-md flex-1 max-w-md">
+<button id="mobile-sidebar-toggle" class="lg:hidden p-2 -ml-1 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button" aria-label="Buka Menu">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<div class="relative w-full flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px] pointer-events-none">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg bg-surface-container-low border border-outline-variant/50 font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-fixed" placeholder="Cari siswa, transaksi, atau tanggal..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-space-md shrink-0">
+<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button" aria-label="Notifikasi">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] flex items-center justify-center px-1 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold">3</span>
+</button>
+<div class="h-6 w-px bg-outline-variant/50 hidden sm:block"></div>
+<div class="flex items-center gap-space-sm pl-1">
+<div class="w-8 h-8 rounded-full bg-secondary/15 text-secondary ring-2 ring-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0">AF</div>
+<div class="hidden md:flex flex-col text-left"><span class="font-label-lg text-label-lg text-on-surface leading-tight">Ahmad Fauzi (Siswa)</span><span class="font-label-sm text-label-sm text-on-surface-variant">NIS: 89201  XII MIPA 2</span></div>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pt-16 bg-background flex-1 px-4 lg:px-space-lg py-4 lg:py-space-lg"><div class="flex flex-col w-full">
+<div class="relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-primary-container to-surface-tint text-on-primary p-space-lg md:p-space-xl shadow-lg">
+<div class="absolute -right-16 -top-24 w-80 h-80 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+<div class="absolute right-1/4 -bottom-20 w-60 h-60 rounded-full bg-secondary-fixed/20 blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="space-y-space-sm max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-on-primary">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Portal Transparansi Siswa &amp; Wali Murid</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white leading-tight">
+          Halo, Ahmad Fauzi!
+</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed leading-relaxed">
+          Selamat datang di portal keuangan terbuka kelas <strong>XII MIPA 2</strong>. Semua aliran kas tercatat secara real-time demi akuntabilitas bersama.
+        </p>
+<div class="flex flex-wrap items-center gap-space-sm pt-2">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-fixed/30 backdrop-blur-sm text-white">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md">Status Kas Pribadi: LUNAS SEMUA BULAN</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-fixed bg-white/10 px-3 py-1.5 rounded-full">
+            Nol Tunggakan (Rp 0)
+          </span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row lg:flex-col gap-space-sm shrink-0">
+<button class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-surface-container-lowest text-primary shadow-md hover:bg-surface-bright active:scale-95 transition-all duration-200" id="btn-download-kartu">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span class="font-label-lg text-label-lg">Unduh Kartu Iuran Digital (PDF)</span>
+</button>
+<button class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-200">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span class="font-label-md text-label-md">Kirim Salinan ke WhatsApp Wali Murid</span>
+</button>
+</div>
+</div>
+</div>
+<section class="mt-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-xs mb-space-md">
+<div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Ringkasan Kas Publik</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Transparansi Saldo Kelas XII MIPA 2</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Update Terakhir: Hari ini, 14:30 WIB
+      </span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Saldo Kas Bersih Saat Ini</span>
+<div class="mt-1 font-currency-stat text-currency-stat text-primary">Rp 4.850.000</div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">account_balance</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low rounded-xl p-3 flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-snug">
+            Telah diverifikasi silang oleh <strong>Dra. Hj. Nurjanah (Wali Kelas)</strong> &amp; Bendahara.
+          </p>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pemasukan Bulan Ini (Oktober)</span>
+<div class="mt-1 font-currency-stat text-currency-stat text-secondary">+ Rp 1.450.000</div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[26px]">trending_up</span>
+</div>
+</div>
+<div class="mt-space-md">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Partisipasi Siswa</span>
+<span class="font-label-md text-label-md text-secondary">32 dari 36 Siswa (88%)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pengeluaran Bulan Ini (Oktober)</span>
+<div class="mt-1 font-currency-stat text-currency-stat text-error">- Rp 380.000</div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-error-container/60 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[26px]">shopping_cart_checkout</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total 3 Transaksi Kebutuhan Kelas</span>
+<span class="font-label-sm text-label-sm text-error bg-error-container/40 px-2.5 py-1 rounded-md">3 Nota Terlampir</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm mb-space-md pb-space-sm border-b border-outline-variant/20">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Untuk Apa Uang Kas Kita Digunakan?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rincian alokasi belanja kas kelas bulan berjalan (Total: Rp 380.000)</p>
+</div>
+<span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-primary bg-primary-fixed/40 px-3 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-[16px]">visibility</span> Laporan Terbuka Untuk Umum
+        </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="rounded-xl bg-surface-container-low p-space-md space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">cleaning_services</span>
+<span class="font-label-lg text-label-lg text-on-surface">Alat Kebersihan &amp; ATK</span>
+</div>
+<span class="font-label-sm text-label-sm bg-primary-fixed text-primary px-2 py-0.5 rounded">25%</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Rp 95.000</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 25%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Spidol refill papan tulis, penghapus, dan kantong sampah kelas.</p>
+</div>
+<div class="rounded-xl bg-surface-container-low p-space-md space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">print</span>
+<span class="font-label-lg text-label-lg text-on-surface">Fotokopi &amp; Bank Soal</span>
+</div>
+<span class="font-label-sm text-label-sm bg-secondary-fixed/50 text-secondary px-2 py-0.5 rounded">49%</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Rp 185.000</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 49%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Modul latihan Asesmen Sumatif Tengah Semester Fisika &amp; Biologi.</p>
+</div>
+<div class="rounded-xl bg-surface-container-low p-space-md space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">favorite</span>
+<span class="font-label-lg text-label-lg text-on-surface">Kas Sosial / Santunan</span>
+</div>
+<span class="font-label-sm text-label-sm bg-tertiary-fixed text-tertiary px-2 py-0.5 rounded">26%</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Rp 100.000</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 26%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Buah tangan menjenguk rekan sekelas yang rawat inap (Rico Dimas).</p>
+</div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-high/40 rounded-xl flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary">savings</span>
+<span class="font-body-sm text-body-sm">Sisa saldo kas surplus dialokasikan otomatis ke <strong>Rekening Tabungan Persiapan Wisuda &amp; Ujian Akhir</strong>.</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold cursor-pointer hover:underline">Pelajari Rencana Anggaran ?</span>
+</div>
+</div>
+</section>
+<section class="mt-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs mb-space-md">
+<div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">event_available</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Iuran Siswa</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Status Iuran Pribadi Ahmad Fauzi</h2>
+</div>
+<div class="flex items-center gap-3">
+<div class="px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Total Dibayar: </span>
+<span class="font-label-lg text-label-lg text-secondary font-bold">Rp 80.000</span>
+</div>
+<div class="px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tunggakan: </span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Rp 0</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-space-md">
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-secondary"></div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Bulan 01</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Juli 2024</h4>
+<p class="font-label-lg text-label-lg text-on-surface font-bold mt-2">Rp 20.000</p>
+</div>
+<div class="mt-space-md">
+<span class="inline-flex items-center gap-1 w-full justify-center py-1.5 rounded-full bg-secondary-fixed/30 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">check</span> Lunas (12 Jul)
+          </span>
+</div>
+</div>
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-secondary"></div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Bulan 02</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Agustus 2024</h4>
+<p class="font-label-lg text-label-lg text-on-surface font-bold mt-2">Rp 20.000</p>
+</div>
+<div class="mt-space-md">
+<span class="inline-flex items-center gap-1 w-full justify-center py-1.5 rounded-full bg-secondary-fixed/30 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">check</span> Lunas (08 Agu)
+          </span>
+</div>
+</div>
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-secondary"></div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Bulan 03</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">September 2024</h4>
+<p class="font-label-lg text-label-lg text-on-surface font-bold mt-2">Rp 20.000</p>
+</div>
+<div class="mt-space-md">
+<span class="inline-flex items-center gap-1 w-full justify-center py-1.5 rounded-full bg-secondary-fixed/30 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">check</span> Lunas (10 Sep)
+          </span>
+</div>
+</div>
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-secondary"></div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Bulan 04</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Oktober 2024</h4>
+<p class="font-label-lg text-label-lg text-on-surface font-bold mt-2">Rp 20.000</p>
+</div>
+<div class="mt-space-md">
+<span class="inline-flex items-center gap-1 w-full justify-center py-1.5 rounded-full bg-secondary-fixed/30 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">check</span> Lunas (24 Okt)
+          </span>
+</div>
+</div>
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-primary"></div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Bulan 05</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">November 2024</h4>
+<p class="font-label-lg text-label-lg text-on-surface font-bold mt-2">Rp 20.000</p>
+</div>
+<div class="mt-space-md space-y-1">
+<button class="w-full py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm hover:bg-primary-container transition-colors shadow-sm">
+            Bayar Di Depan
+          </button>
+</div>
+</div>
+<div class="rounded-2xl bg-surface-container-low p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between opacity-80">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-outline-variant"></div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Bulan 06</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Desember 2024</h4>
+<p class="font-label-lg text-label-lg text-on-surface font-bold mt-2">Rp 20.000</p>
+</div>
+<div class="mt-space-md">
+<span class="inline-flex items-center gap-1 w-full justify-center py-1.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+            Belum Jatuh Tempo
+          </span>
+</div>
+</div>
+</div>
+</section>
+<div class="mt-space-xl grid grid-cols-1 xl:grid-cols-3 gap-space-lg items-start">
+<div class="xl:col-span-2 space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Catatan Kas</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Riwayat Transaksi &amp; Kuitansi Digital</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Menampilkan 4 Transaksi</span>
+</div>
+<div class="overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<th class="py-3 px-space-md">No. Transaksi</th>
+<th class="py-3 px-space-md">Periode / Keterangan</th>
+<th class="py-3 px-space-md">Tanggal Bayar</th>
+<th class="py-3 px-space-md">Metode Bayar</th>
+<th class="py-3 px-space-md text-right">Nominal</th>
+<th class="py-3 px-space-md text-center">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/15 font-body-md text-body-md">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-space-md font-mono text-label-sm text-primary font-bold">KAS-2410-0042</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Iuran Wajib Oktober 2024</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kas Mingguan (W1 - W4)</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">24 Okt 2024, 09:15</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">qr_code_2</span> QRIS Kas
+                  </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-semibold">
+                  Rp 20.000
+                </td>
+<td class="py-3.5 px-space-md text-center">
+<button class="px-3 py-1.5 rounded-lg bg-primary-fixed/40 text-primary hover:bg-primary-fixed text-label-sm font-label-sm inline-flex items-center gap-1 transition-colors" onclick="showReceipt('KAS-2410-0042', 'Iuran Kas Oktober 2024', 'Rp 20.000', '24 Oktober 2024', 'QRIS Mandiri')">
+<span class="material-symbols-outlined text-[16px]">receipt</span> Kuitansi
+                  </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-space-md font-mono text-label-sm text-primary font-bold">KAS-2409-0038</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Iuran Wajib September 2024</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kas Mingguan (W1 - W4)</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">10 Sep 2024, 11:20</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">payments</span> Tunai (Cash)
+                  </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-semibold">
+                  Rp 20.000
+                </td>
+<td class="py-3.5 px-space-md text-center">
+<button class="px-3 py-1.5 rounded-lg bg-primary-fixed/40 text-primary hover:bg-primary-fixed text-label-sm font-label-sm inline-flex items-center gap-1 transition-colors" onclick="showReceipt('KAS-2409-0038', 'Iuran Kas September 2024', 'Rp 20.000', '10 September 2024', 'Tunai di Kelas')">
+<span class="material-symbols-outlined text-[16px]">receipt</span> Kuitansi
+                  </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-space-md font-mono text-label-sm text-primary font-bold">KAS-2408-0021</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Iuran Wajib Agustus 2024</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kas Mingguan (W1 - W4)</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">08 Agu 2024, 08:45</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">account_balance</span> Transfer BCA
+                  </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-semibold">
+                  Rp 20.000
+                </td>
+<td class="py-3.5 px-space-md text-center">
+<button class="px-3 py-1.5 rounded-lg bg-primary-fixed/40 text-primary hover:bg-primary-fixed text-label-sm font-label-sm inline-flex items-center gap-1 transition-colors" onclick="showReceipt('KAS-2408-0021', 'Iuran Kas Agustus 2024', 'Rp 20.000', '08 Agustus 2024', 'Transfer BCA')">
+<span class="material-symbols-outlined text-[16px]">receipt</span> Kuitansi
+                  </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-space-md font-mono text-label-sm text-primary font-bold">KAS-2407-0012</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Iuran Wajib Juli 2024</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kas Masuk Awal Semester</span>
+</td>
+<td class="py-3.5 px-space-md text-on-surface">12 Jul 2024, 10:02</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">payments</span> Tunai (Cash)
+                  </span>
+</td>
+<td class="py-3.5 px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-semibold">
+                  Rp 20.000
+                </td>
+<td class="py-3.5 px-space-md text-center">
+<button class="px-3 py-1.5 rounded-lg bg-primary-fixed/40 text-primary hover:bg-primary-fixed text-label-sm font-label-sm inline-flex items-center gap-1 transition-colors" onclick="showReceipt('KAS-2407-0012', 'Iuran Kas Juli 2024', 'Rp 20.000', '12 Juli 2024', 'Tunai di Kelas')">
+<span class="material-symbols-outlined text-[16px]">receipt</span> Kuitansi
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="space-y-space-md">
+<div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Pusat Bantuan</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Kontak Bendahara Kelas</h2>
+</div>
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-bold text-xl ring-2 ring-primary/20 shadow-sm shrink-0">SP</div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary rounded-full border-2 border-white" title="Aktif di Jam Sekolah"></span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Salsabila Putri</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bendahara 1 � XII MIPA 2</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-secondary bg-secondary-fixed/30 px-2 py-0.5 rounded">
+              Online Jam Sekolah
+            </span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Ada pertanyaan seputar uang kas, rekonsiliasi transfer, atau butuh bantuan bukti setor? Jangan ragu hubungi bendahara secara langsung.
+        </p>
+<div class="space-y-space-xs pt-space-xs">
+<a class="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-secondary text-white font-label-lg text-label-lg hover:bg-secondary/90 transition-colors shadow-sm" href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span> Chat WhatsApp: 0812-XXXX-7890
+          </a>
+<button class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span> Lihat Nomor Rekening Resmi Kelas
+          </button>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low/70 space-y-1">
+<div class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">info</span> Catatan untuk Orang Tua / Wali:
+          </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Setiap akhir semester ganjil, rekapitulasi lengkap bertanda tangan Wali Kelas akan dibagikan dalam format buku laporan kas cetak.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden flex items-center justify-center p-4" id="receipt-modal">
+<div class="bg-surface-container-lowest rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<div class="p-space-lg bg-primary text-on-primary flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm">Kuitansi Pembayaran Resmi</h3>
+<p class="font-label-sm text-label-sm text-primary-fixed">Kas Kelas XII MIPA 2 � TA 2024/2025</p>
+</div>
+</div>
+<button class="text-white/80 hover:text-white p-1 rounded-lg" onclick="closeReceipt()">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+</div>
+<div class="p-space-lg space-y-space-md">
+<div class="text-center py-2 border-b border-dashed border-outline-variant/50">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Nomor Kuitansi Digital:</span>
+<div class="font-mono font-headline-sm text-primary font-bold" id="modal-receipt-id">KAS-2410-0042</div>
+</div>
+<div class="space-y-space-sm text-body-md">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Diterima dari:</span>
+<span class="font-semibold text-on-surface">Ahmad Fauzi (89201)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Tujuan Iuran:</span>
+<span class="font-semibold text-on-surface" id="modal-receipt-purpose">Iuran Kas Oktober 2024</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Tanggal Transaksi:</span>
+<span class="font-semibold text-on-surface" id="modal-receipt-date">24 Oktober 2024</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Metode Pembayaran:</span>
+<span class="font-semibold text-on-surface" id="modal-receipt-channel">QRIS Mandiri</span>
+</div>
+<div class="flex justify-between pt-2 border-t border-outline-variant/30">
+<span class="font-bold text-on-surface">Jumlah Nominal:</span>
+<span class="font-headline-md text-headline-md text-secondary font-bold" id="modal-receipt-amount">Rp 20.000</span>
+</div>
+</div>
+<div class="p-3 bg-secondary-fixed/20 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[24px]">verified_user</span>
+<div class="text-left font-body-sm text-body-sm text-on-surface">
+            Status: <strong>SAH &amp; TERCATAT</strong> dalam buku kas resmi bendahara kelas.
+          </div>
+</div>
+<div class="flex gap-space-sm pt-2">
+<button class="w-1/2 py-2.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors" onclick="closeReceipt()">
+            Tutup
+          </button>
+<button class="w-1/2 py-2.5 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md transition-colors shadow-sm flex items-center justify-center gap-1.5" onclick="window.print()">
+<span class="material-symbols-outlined text-[16px]">print</span> Cetak Kuitansi
+          </button>
+</div>
+</div>
+</div>
+</div>
+
+</div></main></div></body></html>
