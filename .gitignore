@@ -71,5 +71,9 @@ Homestead.yaml
 Thumbs.db
 desktop.ini
 
-# Agent Workspace Settings
+# Agent & AI Configuration (Hidden from public)
 /.agents/
+/skills/
+/anti-slop/
+/antislop.md
+*.md
