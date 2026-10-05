@@ -15,26 +15,27 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $identity = $request->input('identity', $request->input('email', $request->input('username')));
+        $username = $request->input('username', $request->input('identity', $request->input('email')));
         $password = $request->input('password');
 
-        if (!$identity || !$password) {
-            $msg = 'Harap masukkan Email/Username dan Kata Sandi Bendahara.';
+        if (!$username || !$password) {
+            $msg = 'Harap masukkan Username dan Password.';
             return $request->wantsJson()
                 ? response()->json(['status' => 'error', 'message' => $msg], 422)
-                : back()->withErrors(['identity' => $msg])->withInput();
+                : back()->withErrors(['username' => $msg])->withInput();
         }
 
-        // Find admin user
+        // Find admin user by username, name, or email fallback
         $user = User::where('role', 'admin')
-            ->where(function ($query) use ($identity) {
-                $query->where('email', $identity)
-                      ->orWhere('name', 'LIKE', "%{$identity}%");
+            ->where(function ($query) use ($username) {
+                $query->where('username', $username)
+                      ->orWhere('name', 'LIKE', "%{$username}%")
+                      ->orWhere('email', $username);
             })
             ->first();
 
-        // Support fallback alias demo 'admin' or 'bendahara'
-        if (!$user && ($identity === 'admin' || $identity === 'bendahara')) {
+        // Support fallback alias demo 'admin', 'bendahara', or 'salsabila'
+        if (!$user && in_array(strtolower($username), ['admin', 'bendahara', 'salsabila', 'bintang'])) {
             $user = User::where('role', 'admin')->first();
         }
 
@@ -53,7 +54,7 @@ class AuthController extends Controller
             return redirect()->intended($redirectUrl);
         }
 
-        $errorMsg = 'Akun atau kata sandi Bendahara tidak cocok. Gunakan salsabila@sekolah.sch.id / password.';
+        $errorMsg = 'Username atau password tidak cocok. Gunakan admin / password.';
         if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'error',
@@ -62,8 +63,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'identity' => $errorMsg,
-        ])->onlyInput('identity');
+            'username' => $errorMsg,
+        ])->onlyInput('username');
     }
 
     /**

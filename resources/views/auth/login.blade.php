@@ -35,16 +35,11 @@
                                 <div>
                                     <div class="flex items-center gap-space-xs">
                                         <span class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Kas Kelas</span>
-                                        <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-semibold uppercase">v2.0 L11</span>
                                     </div>
                                     <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">SMAN 1 - Keuangan Digital Terbuka XII MIPA 2</p>
                                 </div>
                             </div>
-                            <!-- Live Status -->
-                            <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low">
-                                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                                <span class="font-label-sm text-label-sm text-on-surface-variant font-medium uppercase">Laravel 11 Aktif</span>
-                            </div>
+
                         </div>
 
                         <div class="mb-space-lg">
@@ -81,19 +76,20 @@
                         <form method="POST" action="{{ route('login.post') }}" class="space-y-space-md">
                             @csrf
 
-                            <!-- Identity Field -->
+                            <!-- Username Field -->
                             <div>
-                                <label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="user-identity">
-                                    Email atau Username Bendahara
+                                <label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="user-username">
+                                    Username
                                 </label>
                                 <div class="relative flex items-center">
                                     <span class="material-symbols-outlined absolute left-3.5 text-outline text-[20px] pointer-events-none">person</span>
                                     <input class="w-full h-11 pl-11 pr-4 bg-surface-container-lowest border border-outline-variant/60 rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline/70 shadow-xs focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" 
-                                           id="user-identity" 
-                                           name="identity"
-                                           value="{{ old('identity', 'salsabila@sekolah.sch.id') }}" 
-                                           placeholder="salsabila@sekolah.sch.id..." 
+                                           id="user-username" 
+                                           name="username"
+                                           value="{{ old('username', 'admin') }}" 
+                                           placeholder="admin" 
                                            type="text" 
+                                           autocomplete="username"
                                            required/>
                                 </div>
                             </div>
@@ -102,7 +98,7 @@
                             <div id="password-group">
                                 <div class="flex items-center justify-between mb-1.5">
                                     <label class="block font-label-md text-label-md text-on-surface font-medium" for="user-password">
-                                        Kata Sandi
+                                        Password
                                     </label>
                                 </div>
                                 <div class="relative flex items-center">
@@ -113,6 +109,7 @@
                                            value="password"
                                            placeholder="••••••••" 
                                            type="password"
+                                           autocomplete="current-password"
                                            required/>
                                     <button aria-label="Toggle password visibility" class="absolute right-3 text-outline hover:text-on-surface p-1 rounded-md transition-colors" onclick="togglePassword()" type="button">
                                         <span class="material-symbols-outlined text-[20px] block" id="password-toggle-icon">visibility</span>
@@ -127,13 +124,13 @@
                                     <span class="font-body-sm text-body-sm text-on-surface-variant">Ingat Saya</span>
                                 </label>
                                 <span class="font-label-sm text-label-sm text-outline">
-                                    Demo: <code class="bg-surface-container-low px-1.5 py-0.5 rounded text-primary font-mono font-semibold">password</code>
+                                    Demo: <code class="bg-surface-container-low px-1.5 py-0.5 rounded text-primary font-mono font-semibold">admin</code> / <code class="bg-surface-container-low px-1.5 py-0.5 rounded text-primary font-mono font-semibold">password</code>
                                 </span>
                             </div>
 
                             <!-- Primary Submit CTA -->
                             <button class="w-full h-11 rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center gap-2 shadow-xs hover:bg-primary-container active:scale-[0.99] transition-all duration-150 mt-space-md" type="submit">
-                                <span>Masuk ke Panel Bendahara</span>
+                                <span>Masuk</span>
                                 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                             </button>
                         </form>

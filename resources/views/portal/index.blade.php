@@ -21,7 +21,7 @@
                 </h1>
                 
                 <p class="font-body-lg text-body-lg text-primary-fixed leading-relaxed">
-                    Selamat datang di portal keuangan terbuka kelas <strong>{{ $siswa ? $siswa->kelas : 'XII MIPA 2' }}</strong>. Semua aliran kas tercatat secara real-time demi akuntabilitas bersama.
+                    Welcome di portal keuangan terbuka kelas <strong>{{ $siswa ? $siswa->kelas : 'XII MIPA 2' }}</strong>. Semua aliran kas tercatat secara real-time demi akuntabilitas bersama.
                 </p>
                 
                 <div class="flex flex-wrap items-center gap-space-sm pt-2">
@@ -208,10 +208,10 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
             @php
                 $mingguList = [
-                    ['minggu' => 1, 'label' => 'Minggu 1', 'nominal' => 20000],
-                    ['minggu' => 2, 'label' => 'Minggu 2', 'nominal' => 20000],
-                    ['minggu' => 3, 'label' => 'Minggu 3', 'nominal' => 20000],
-                    ['minggu' => 4, 'label' => 'Minggu 4', 'nominal' => 20000],
+                    ['minggu' => 1, 'label' => 'Minggu 1', 'nominal' => 5000],
+                    ['minggu' => 2, 'label' => 'Minggu 2', 'nominal' => 5000],
+                    ['minggu' => 3, 'label' => 'Minggu 3', 'nominal' => 5000],
+                    ['minggu' => 4, 'label' => 'Minggu 4', 'nominal' => 5000],
                 ];
                 $pembayaransByMinggu = $siswa ? $siswa->pembayarans->keyBy('minggu_ke') : collect();
             @endphp
@@ -352,7 +352,7 @@
                     <a class="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-secondary text-white font-label-lg text-label-lg hover:bg-secondary/90 transition-colors shadow-sm" href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank">
                         <span class="material-symbols-outlined text-[20px]">chat</span> Chat WhatsApp: 0812-3456-7890
                     </a>
-                    <button class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="alert('Nomor Rekening Kas Kelas XII MIPA 2:\nBank BRI: 1029-01-002931-50-2\na.n. Salsabila Putri (Bendahara)')">
+                    <button class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="window.confirmModal({ title: 'Nomor Rekening Resmi Kelas XII MIPA 2', message: 'Bank BRI: 1029-01-002931-50-2 a.n. Salsabila Putri (Bendahara 1). Simpan bukti transfer untuk verifikasi iuran kas.', type: 'info', confirmText: 'Salin No. Rekening', cancelText: 'Tutup', onConfirm: () => { navigator.clipboard.writeText('102901002931502'); window.showToast('Nomor Rekening BRI berhasil disalin!', 'success'); } })">
                         <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span> Lihat Nomor Rekening Resmi Kelas
                     </button>
                 </div>
@@ -408,7 +408,7 @@
                     </div>
                     <div class="flex justify-between pt-2 border-t border-outline-variant/30">
                         <span class="font-bold text-on-surface">Jumlah Nominal:</span>
-                        <span class="font-headline-md text-headline-md text-secondary font-bold" id="modal-receipt-amount">Rp 20.000</span>
+                        <span class="font-headline-md text-headline-md text-secondary font-bold" id="modal-receipt-amount">Rp 5.000</span>
                     </div>
                 </div>
                 <div class="p-3 bg-secondary-fixed/20 rounded-xl flex items-center gap-3">

@@ -160,7 +160,7 @@
                                     <button type="button" onclick="openEditStudentModal({{ json_encode($s) }})" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Edit Data Siswa">
                                         <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </button>
-                                    <form action="{{ route('siswa.destroy', $s->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data {{ $s->nama }}?');" class="inline">
+                                    <form action="{{ route('siswa.destroy', $s->id) }}" method="POST" onsubmit="return handleConfirmDelete(event, this, 'Hapus Data Siswa', 'Apakah Anda yakin ingin menghapus data {{ $s->nama }}? Data yang dihapus tidak dapat dikembalikan.');" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors" title="Hapus Siswa">
@@ -219,7 +219,7 @@
             </div>
             <div>
                 <label class="block font-label-md text-label-md text-on-surface mb-1">Target Kas Bulanan (Rp)</label>
-                <input type="number" name="target_kas" value="80000" min="0" class="w-full h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:outline-none focus:border-primary-container text-body-md text-on-surface"/>
+                <input type="number" name="target_kas" value="20000" min="0" class="w-full h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:outline-none focus:border-primary-container text-body-md text-on-surface"/>
             </div>
             <div class="pt-3 border-t border-outline-variant/30 flex justify-end gap-2">
                 <button type="button" onclick="closeAddStudentModal()" class="px-4 py-2 rounded-lg bg-surface-container text-on-surface font-label-lg hover:bg-surface-container-high transition-colors">Batal</button>
@@ -283,7 +283,7 @@ function closeAddStudentModal() {
 }
 function openEditStudentModal(student) {
     const form = document.getElementById('form-edit-student');
-    form.action = `/siswa/${student.id}`;
+    form.action = "{{ route('siswa.index') }}/" + student.id;
     document.getElementById('edit-nama').value = student.nama;
     document.getElementById('edit-jk').value = student.jenis_kelamin;
     document.getElementById('edit-nohp').value = student.no_hp || '';

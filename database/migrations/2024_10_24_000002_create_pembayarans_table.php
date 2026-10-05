@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('minggu_ke')->default(1);
             $table->string('bulan', 20)->default('Oktober');
             $table->unsignedSmallInteger('tahun')->default(2024);
-            $table->unsignedInteger('nominal')->default(20000);
+            $table->unsignedInteger('nominal')->default(5000);
             $table->date('tanggal_bayar');
             $table->enum('metode_pembayaran', ['tunai', 'transfer', 'qris'])->default('tunai');
             $table->enum('status', ['lunas', 'pending', 'batal'])->default('lunas');

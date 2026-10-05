@@ -162,7 +162,7 @@
                 </div>
                 <div class="flex justify-between items-center pt-2">
                     <span class="text-sm font-bold text-slate-700">Nominal:</span>
-                    <span class="text-xl font-extrabold text-[#15803D]" id="modal-receipt-amount">Rp 20.000</span>
+                    <span class="text-xl font-extrabold text-[#15803D]" id="modal-receipt-amount">Rp 5.000</span>
                 </div>
             </div>
 

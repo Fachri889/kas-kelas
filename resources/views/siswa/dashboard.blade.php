@@ -13,14 +13,7 @@
         <div class="absolute right-1/4 -bottom-20 w-60 h-60 rounded-full bg-blue-900/20 blur-2xl pointer-events-none"></div>
         
         <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <!-- Left Section -->
             <div class="space-y-4 max-w-2xl">
-                <!-- Uppercase Pill Badge -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 shadow-2xs">
-                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-                    <span class="text-[11px] font-bold tracking-wider uppercase">PORTAL TRANSPARANSI PUBLIK SISWA & WALI MURID</span>
-                </div>
-                
                 <!-- Large Greeting Heading -->
                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
                     Halo, {{ $siswa ? $siswa->nama : 'Ahmad Fauzi' }}!
@@ -28,7 +21,7 @@
                 
                 <!-- Semi-transparent Description -->
                 <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-                    Selamat datang di portal transparansi keuangan kelas <strong>{{ $siswa ? $siswa->kelas : 'XII IPA 2' }}</strong>. Seluruh mutasi dana kas tercatat akuntabel, terbuka, dan dapat dipantau oleh seluruh siswa dan wali murid.
+                    Welcome di portal transparansi keuangan kelas <strong>{{ $siswa ? $siswa->kelas : 'XII IPA 2' }}</strong>. Seluruh mutasi dana kas tercatat akuntabel, terbuka, dan dapat dipantau oleh seluruh siswa dan wali murid.
                 </p>
                 
                 <!-- Badges -->
@@ -183,190 +176,6 @@
         </div>
     </div>
 
-    <!-- E. Tabel Transparansi Status Kas & Tunggakan Seluruh Siswa -->
-    <div class="bg-white rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden" id="daftar-tunggakan-siswa">
-        <!-- Header -->
-        <div class="p-6 sm:px-8 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-                <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[#2563EB] text-[24px]">group</span>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
-                        Transparansi Status Iuran & Tunggakan Seluruh Siswa
-                    </h3>
-                </div>
-                <p class="text-xs text-slate-500 mt-1">
-                    Daftar rekapitulasi status pembayaran iuran kelas <strong>{{ $siswa ? $siswa->kelas : 'XII MIPA 2' }}</strong>. Menampilkan siswa yang telah lunas dan siswa yang memiliki tunggakan.
-                </p>
-            </div>
-
-            <!-- Arrears Summary Mini Stats -->
-            <div class="flex flex-wrap items-center gap-2">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-xs font-semibold">
-                    <span class="material-symbols-outlined text-[16px]">check_circle</span>
-                    <span>Lunas: <strong>{{ $siswaLunasCount }} Siswa</strong></span>
-                </div>
-                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-50 text-red-700 border border-red-200/80 text-xs font-semibold">
-                    <span class="material-symbols-outlined text-[16px]">warning</span>
-                    <span>Menunggak: <strong>{{ $siswaNunggakCount }} Siswa</strong></span>
-                </div>
-                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold">
-                    <span>Total Tunggakan: <strong class="text-red-600 font-mono">Rp {{ number_format($totalTunggakanKelas, 0, ',', '.') }}</strong></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Filter Controls & Search -->
-        <div class="p-4 sm:px-8 bg-slate-50/70 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="flex items-center gap-2 overflow-x-auto">
-                <button type="button" 
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-blue-600 text-white shadow-2xs" 
-                        data-filter="all" 
-                        onclick="filterStudents('all', this)">
-                    Semua ({{ $totalSiswa }})
-                </button>
-                <button type="button" 
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-white text-slate-600 hover:text-slate-900 border border-slate-200" 
-                        data-filter="nunggak" 
-                        onclick="filterStudents('nunggak', this)">
-                    Punya Tunggakan ({{ $siswaNunggakCount }})
-                </button>
-                <button type="button" 
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-white text-slate-600 hover:text-slate-900 border border-slate-200" 
-                        data-filter="lunas" 
-                        onclick="filterStudents('lunas', this)">
-                    Lunas ({{ $siswaLunasCount }})
-                </button>
-            </div>
-
-            <!-- Search Input -->
-            <div class="relative w-full sm:w-64">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] pointer-events-none">search</span>
-                <input type="text" 
-                       id="search-siswa-input" 
-                       class="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-2xs" 
-                       placeholder="Cari nama siswa..." 
-                       oninput="searchStudents(this.value)"/>
-            </div>
-        </div>
-
-        <!-- Students Table -->
-        <div class="overflow-x-auto">
-            <table class="w-full min-w-[760px] text-left border-collapse" id="table-students-list">
-                <thead>
-                    <tr class="bg-white border-b border-slate-200/80 text-slate-500 font-bold text-[11px] uppercase tracking-wider">
-                        <th class="py-3.5 px-6 w-12 text-center">NO</th>
-                        <th class="py-3.5 px-6">NAMA SISWA</th>
-                        <th class="py-3.5 px-6">WALI MURID</th>
-                        <th class="py-3.5 px-6 text-right">TARGET KAS</th>
-                        <th class="py-3.5 px-6 text-right">TERBAYAR</th>
-                        <th class="py-3.5 px-6 text-right">SISA TUNGGAKAN</th>
-                        <th class="py-3.5 px-6 text-center">STATUS KAS</th>
-                        <th class="py-3.5 px-6 text-center">AKSI</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-sm">
-                    @forelse($allStudents as $index => $st)
-                        @php
-                            $isRowLunas = $st->status === 'lunas';
-                            $isSelected = $siswa && $siswa->id === $st->id;
-                        @endphp
-                        <tr class="student-row hover:bg-slate-50/80 transition-colors {{ $isSelected ? 'bg-blue-50/40' : '' }}" 
-                            data-status="{{ $isRowLunas ? 'lunas' : 'nunggak' }}" 
-                            data-name="{{ strtolower($st->nama) }}" 
-                            data-nis="{{ $st->nis }}">
-                            <!-- No -->
-                            <td class="py-3.5 px-6 text-center text-xs font-semibold text-slate-400">
-                                {{ $index + 1 }}
-                            </td>
-
-                            <!-- Siswa -->
-                            <td class="py-3.5 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full {{ $isRowLunas ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800' }} flex items-center justify-center font-bold text-xs uppercase shrink-0">
-                                        {{ $st->initials }}
-                                    </div>
-                                    <div>
-                                        <a href="{{ route('siswa.dashboard', ['nis' => $st->nis]) }}#rincian-siswa" 
-                                           class="font-bold text-slate-900 hover:text-blue-600 transition-colors inline-flex items-center gap-1.5">
-                                            <span>{{ $st->nama }}</span>
-                                            @if($isSelected)
-                                                <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-100 text-blue-700">Dipilih</span>
-                                            @endif
-                                        </a>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <!-- Wali Murid -->
-                            <td class="py-3.5 px-6 text-xs text-slate-600 font-medium">
-                                {{ $st->nama_wali ?: '-' }}
-                            </td>
-
-                            <!-- Target Kas -->
-                            <td class="py-3.5 px-6 text-right font-medium text-xs text-slate-700 tabular-nums">
-                                Rp {{ number_format($st->target_kas, 0, ',', '.') }}
-                            </td>
-
-                            <!-- Terbayar -->
-                            <td class="py-3.5 px-6 text-right font-bold text-xs text-emerald-700 tabular-nums">
-                                Rp {{ number_format($st->total_terbayar, 0, ',', '.') }}
-                            </td>
-
-                            <!-- Sisa Tunggakan -->
-                            <td class="py-3.5 px-6 text-right whitespace-nowrap">
-                                @if($st->sisa_kas > 0)
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-[#DC2626] bg-[#FEE2E2] border border-red-200/80 whitespace-nowrap tabular-nums">
-                                        <span class="material-symbols-outlined text-[15px]">warning</span>
-                                        <span>Rp {{ number_format($st->sisa_kas, 0, ',', '.') }}</span>
-                                    </span>
-                                @else
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-[#15803D] bg-[#DCFCE7] border border-emerald-200/80 whitespace-nowrap tabular-nums">
-                                        <span class="material-symbols-outlined text-[15px]">check_circle</span>
-                                        <span>Rp 0 (Lunas)</span>
-                                    </span>
-                                @endif
-                            </td>
-
-                            <!-- Status Kas -->
-                            <td class="py-3.5 px-6 text-center whitespace-nowrap">
-                                @if($isRowLunas)
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DCFCE7] text-[#15803D] border border-emerald-200/70 whitespace-nowrap">
-                                        <span class="material-symbols-outlined text-[14px]">verified</span>
-                                        <span>LUNAS</span>
-                                    </span>
-                                @else
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FEE2E2] text-[#DC2626] border border-red-200/70 whitespace-nowrap">
-                                        <span class="material-symbols-outlined text-[14px]">pending</span>
-                                        <span>BELUM LUNAS</span>
-                                    </span>
-                                @endif
-                            </td>
-
-                            <!-- Aksi -->
-                            <td class="py-3.5 px-6 text-center whitespace-nowrap">
-                                <a href="{{ route('siswa.dashboard', ['nis' => $st->nis]) }}#rincian-siswa" 
-                                   class="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold {{ $isSelected ? 'bg-blue-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700' }} transition-colors whitespace-nowrap">
-                                    <span class="material-symbols-outlined text-[16px]">visibility</span>
-                                    <span>Pilih Siswa</span>
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="py-10 text-center text-slate-400 text-sm">
-                                Tidak ada data siswa ditemukan.
-                            </td>
-                        </tr>
-                    @endforelse
-                    <tr id="empty-search-row" class="hidden">
-                        <td colspan="8" class="py-8 text-center text-slate-400 text-sm">
-                            Tidak ditemukan siswa dengan kata kunci pencarian tersebut.
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
     <!-- Status Iuran Pribadi Per Minggu -->
     <div class="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] border border-slate-100" id="rincian-siswa">
@@ -376,7 +185,7 @@
                     Status Iuran Kas Pribadi ({{ $siswa ? $siswa->nama : 'Siswa' }})
                 </h3>
                 <p class="text-xs text-slate-500 mt-0.5">
-                    Target kas: <strong>Rp {{ number_format($siswa ? $siswa->target_kas : 80000, 0, ',', '.') }}</strong> per bulan (Rp 20.000 / minggu)
+                    Target kas: <strong>Rp {{ number_format($siswa ? $siswa->target_kas : 20000, 0, ',', '.') }}</strong> per bulan (Rp 5.000 / minggu)
                 </p>
             </div>
             <div class="flex items-center gap-2.5">
@@ -388,10 +197,10 @@
 
         @php
             $mingguList = [
-                ['minggu' => 1, 'label' => 'Minggu ke-1', 'nominal' => 20000],
-                ['minggu' => 2, 'label' => 'Minggu ke-2', 'nominal' => 20000],
-                ['minggu' => 3, 'label' => 'Minggu ke-3', 'nominal' => 20000],
-                ['minggu' => 4, 'label' => 'Minggu ke-4', 'nominal' => 20000],
+                ['minggu' => 1, 'label' => 'Minggu ke-1', 'nominal' => 5000],
+                ['minggu' => 2, 'label' => 'Minggu ke-2', 'nominal' => 5000],
+                ['minggu' => 3, 'label' => 'Minggu ke-3', 'nominal' => 5000],
+                ['minggu' => 4, 'label' => 'Minggu ke-4', 'nominal' => 5000],
             ];
             $pembayaransByMinggu = $siswa ? $siswa->pembayarans->keyBy('minggu_ke') : collect();
         @endphp
@@ -402,7 +211,7 @@
                     $pmb = $pembayaransByMinggu->get($m['minggu']);
                     $isLunasMinggu = $pmb && $pmb->status === 'lunas';
                 @endphp
-                <div class="relative rounded-xl p-4.5 border {{ $isLunasMinggu ? 'border-emerald-200/80 bg-emerald-50/20' : 'border-slate-200 bg-slate-50/50' }} flex flex-col justify-between transition-all">
+                <div class="relative rounded-xl p-5 border {{ $isLunasMinggu ? 'border-emerald-200/80 bg-emerald-50/20' : 'border-slate-200 bg-slate-50/50' }} flex flex-col justify-between transition-all">
                     <div>
                         <div class="flex items-center justify-between">
                             <span class="text-[11px] font-bold uppercase tracking-wider {{ $isLunasMinggu ? 'text-[#15803D]' : 'text-slate-500' }}">
@@ -583,7 +392,7 @@
                 </div>
                 <div class="flex justify-between items-center pt-2">
                     <span class="text-sm font-bold text-slate-700">Nominal:</span>
-                    <span class="text-xl font-extrabold text-[#15803D]" id="modal-receipt-amount">Rp 20.000</span>
+                    <span class="text-xl font-extrabold text-[#15803D]" id="modal-receipt-amount">Rp 5.000</span>
                 </div>
             </div>
 
@@ -636,47 +445,7 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeReceipt();
 });
 
-// Filter & Search Siswa Logic
-function filterStudents(type, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => {
-        b.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-white text-slate-600 hover:text-slate-900 border border-slate-200';
-    });
-    btn.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-blue-600 text-white shadow-2xs';
 
-    const searchVal = (document.getElementById('search-siswa-input')?.value || '').toLowerCase().trim();
-    applyFilterAndSearch(type, searchVal);
-}
-
-function searchStudents(val) {
-    const activeBtn = document.querySelector('.filter-btn.bg-blue-600');
-    const filterType = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
-    applyFilterAndSearch(filterType, val.toLowerCase().trim());
-}
-
-function applyFilterAndSearch(filterType, query) {
-    const rows = document.querySelectorAll('.student-row');
-    let visibleCount = 0;
-    rows.forEach(row => {
-        const rowStatus = row.getAttribute('data-status');
-        const rowName = row.getAttribute('data-name') || '';
-        const rowNis = row.getAttribute('data-nis') || '';
-
-        const matchesFilter = (filterType === 'all') || (rowStatus === filterType);
-        const matchesQuery = !query || rowName.includes(query) || rowNis.includes(query);
-
-        if (matchesFilter && matchesQuery) {
-            row.style.display = '';
-            visibleCount++;
-        } else {
-            row.style.display = 'none';
-        }
-    });
-
-    const emptyRow = document.getElementById('empty-search-row');
-    if (emptyRow) {
-        emptyRow.classList.toggle('hidden', visibleCount > 0);
-    }
-}
 </script>
 @endpush
 

@@ -8,7 +8,7 @@
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs border border-outline-variant/30">
         <div class="flex flex-col gap-1 min-w-0 flex-1">
             <div class="flex items-center gap-2 flex-wrap">
-                <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold">Selamat Datang, Salsabila!</h1>
+                <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold">Welcome, Salsabila!</h1>
             </div>
             <p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
                 <span class="inline-block w-2 h-2 rounded-full bg-secondary shrink-0"></span>

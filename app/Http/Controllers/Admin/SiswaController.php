@@ -68,7 +68,7 @@ class SiswaController extends Controller
             'target_kas' => 'nullable|integer|min:0',
         ]);
 
-        $validated['target_kas'] = $validated['target_kas'] ?? 80000;
+        $validated['target_kas'] = $validated['target_kas'] ?? 20000;
         $validated['total_terbayar'] = 0;
         $validated['status'] = 'belum_lunas';
 

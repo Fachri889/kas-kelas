@@ -11,11 +11,6 @@
 
         <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div class="space-y-2 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-slate-300">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span class="uppercase tracking-wider">Kas Kelas XII IPA 2 · Periode Resmi</span>
-                </div>
-
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
                     Laporan Pertanggungjawaban Kas
                 </h1>

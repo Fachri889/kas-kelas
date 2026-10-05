@@ -34,7 +34,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// 2. Admin Panel Routes (Protected by auth & role:admin)
+// 2. Admin Routes (Protected by auth & role:admin)
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'role:admin'])

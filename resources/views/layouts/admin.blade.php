@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin Panel') - Kas Kelas XII IPA 2</title>
+    <title>@yield('title') - Kas Kelas XII IPA 2</title>
     
     <!-- Modern Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{{ asset('js/tailwind-config.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
     
     @stack('styles')
 </head>
@@ -36,12 +37,7 @@
                     <img alt="Kas Kelas Logo" class="h-8 w-8 object-contain shrink-0" src="{{ asset('logo.svg') }}"/>
                     <div class="flex flex-col min-w-0">
                         <span class="text-base font-bold text-slate-900 tracking-tight leading-none">Kas Kelas</span>
-                        <div class="flex items-center gap-1.5 mt-1">
-                            <span class="bg-blue-50 text-blue-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-blue-100 uppercase tracking-wider leading-none">
-                                Admin
-                            </span>
-                            <span class="text-xs text-slate-500 font-medium truncate">XII IPA 2</span>
-                        </div>
+                        <span class="text-xs text-slate-500 font-medium truncate mt-1">XII IPA 2</span>
                     </div>
                 </a>
                 <button id="mobile-sidebar-close" 
@@ -102,17 +98,6 @@
 
         <!-- Sidebar Footer -->
         <div class="p-4 border-t border-slate-100 flex flex-col gap-2.5">
-            <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                <div class="flex items-center gap-2">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    <span class="font-semibold text-slate-700">Admin Online</span>
-                </div>
-                <span class="text-slate-400 text-[11px] font-mono">Role: {{ auth()->user()->role ?? 'admin' }}</span>
-            </div>
-
             <form action="{{ route('logout') }}" method="POST" class="w-full">
                 @csrf
                 <button type="submit" 
@@ -166,7 +151,7 @@
                                 {{ auth()->user()->name ?? 'Salsabila Putri' }}
                             </span>
                             <span class="text-[11px] text-slate-500 font-medium">
-                                Bendahara 1 • Admin Panel
+                                Bendahara 1
                             </span>
                         </div>
                     </div>
@@ -176,6 +161,12 @@
 
         <!-- Main Content Canvas with Deliberate Spacing to Prevent Overlap -->
         <main class="w-full pt-24 pb-12 bg-slate-50 flex-1 px-4 sm:px-6 lg:px-8">
+            @if(session('success'))
+                <div data-flash-success="{{ session('success') }}" class="hidden"></div>
+            @endif
+            @if(session('error') || $errors->any())
+                <div data-flash-error="{{ session('error') ?? $errors->first() }}" class="hidden"></div>
+            @endif
             @yield('content')
         </main>
     </div>

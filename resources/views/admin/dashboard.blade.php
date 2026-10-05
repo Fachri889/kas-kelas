@@ -8,11 +8,11 @@
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs border border-outline-variant/30">
         <div class="flex flex-col gap-1 min-w-0 flex-1">
             <div class="flex items-center gap-2 flex-wrap">
-                <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold">Selamat Datang, {{ auth()->user()->name ?? 'Salsabila' }}!</h1>
+                <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold">Welcome, {{ auth()->user()->name ?? 'Salsabila' }}!</h1>
             </div>
             <p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
                 <span class="inline-block w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-                <span class="truncate sm:whitespace-normal">Sistem Keuangan Kas Kelas XII IPA 2 · Tahun Ajaran 2024/2025 · Panel Admin</span>
+                <span class="truncate sm:whitespace-normal">Sistem Keuangan Kas Kelas XII IPA 2 · Tahun Ajaran 2024/2025</span>
             </p>
         </div>
         <div class="flex flex-row items-center gap-2.5 sm:gap-3 shrink-0 flex-nowrap overflow-x-auto pt-1 lg:pt-0">

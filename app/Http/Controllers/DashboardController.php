@@ -20,8 +20,8 @@ class DashboardController extends Controller
         $siswaLunas = Siswa::where('status', 'lunas')->count();
         $persenLunas = $totalSiswa > 0 ? round(($siswaLunas / $totalSiswa) * 100) : 0;
 
-        // Target kas bulan ini (36 siswa * 80.000 = 2.880.000)
-        $targetBulanIni = 2880000;
+        // Target kas bulan ini
+        $targetBulanIni = (int) Siswa::sum('target_kas') ?: ($totalSiswa * 20000);
         $persenTarget = $targetBulanIni > 0 ? round(($totalPemasukan / $targetBulanIni) * 100) : 0;
 
         // Recent transactions combined

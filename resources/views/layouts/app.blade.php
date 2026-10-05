@@ -138,31 +138,11 @@
 
         <!-- Main Content Area -->
         <main class="w-full pt-24 pb-10 bg-[#F8FAFC] flex-1 px-4 sm:px-6 lg:px-space-lg">
-            <!-- Flash Alerts -->
             @if(session('success'))
-                <div class="mb-space-md p-4 rounded-xl bg-secondary-container/60 border border-secondary/30 text-on-secondary-container flex items-center justify-between animate-fadeIn">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-secondary text-[22px]">check_circle</span>
-                        <span class="font-label-lg text-label-lg">{{ session('success') }}</span>
-                    </div>
-                    <button type="button" onclick="this.parentElement.remove()" class="p-1 rounded-lg hover:bg-secondary/20">
-                        <span class="material-symbols-outlined text-[18px]">close</span>
-                    </button>
-                </div>
+                <div data-flash-success="{{ session('success') }}" class="hidden"></div>
             @endif
-
             @if(session('error') || $errors->any())
-                <div class="mb-space-md p-4 rounded-xl bg-error-container/60 border border-error/30 text-on-error-container flex items-center justify-between animate-fadeIn">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-error text-[22px]">error</span>
-                        <div class="font-label-lg text-label-lg">
-                            {{ session('error') ?? $errors->first() }}
-                        </div>
-                    </div>
-                    <button type="button" onclick="this.parentElement.remove()" class="p-1 rounded-lg hover:bg-error/20">
-                        <span class="material-symbols-outlined text-[18px]">close</span>
-                    </button>
-                </div>
+                <div data-flash-error="{{ session('error') ?? $errors->first() }}" class="hidden"></div>
             @endif
 
             @yield('content')

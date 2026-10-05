@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->string('nama_wali')->nullable();
             $table->string('kelas')->default('XII IPA 2');
-            $table->unsignedInteger('target_kas')->default(80000);
+            $table->unsignedInteger('target_kas')->default(20000);
             $table->unsignedInteger('total_terbayar')->default(0);
             $table->enum('status', ['lunas', 'belum_lunas'])->default('belum_lunas');
             $table->timestamps();

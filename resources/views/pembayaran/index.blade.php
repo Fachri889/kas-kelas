@@ -12,7 +12,7 @@
                 <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-secondary font-label-sm font-semibold whitespace-nowrap">Bulan {{ $bulan }} {{ $tahun }}</span>
             </div>
             <p class="font-body-md text-body-md text-on-surface-variant mt-1">
-                Catat dan pantau pembayaran kas mingguan (Rp 20.000/minggu) per siswa.
+                Catat dan pantau pembayaran kas mingguan (Rp 5.000/minggu) per siswa.
             </p>
         </div>
         <div class="flex flex-row items-center gap-2.5 sm:gap-3 shrink-0 flex-nowrap overflow-x-auto pt-1 sm:pt-0">
@@ -34,7 +34,7 @@
                 <span class="material-symbols-outlined text-primary text-[22px]">calendar_month</span>
                 <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Status Mingguan Siswa (Oktober 2024)</h2>
             </div>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Target per siswa: Rp 80.000 (4 Minggu × Rp 20.000)</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Target per siswa: Rp 20.000 (4 Minggu × Rp 5.000)</span>
         </div>
 
         <div class="overflow-x-auto w-full">
@@ -56,7 +56,7 @@
                         @php
                             $paidWeeks = $s->pembayarans->pluck('minggu_ke')->toArray();
                             // If student has total_terbayar, estimate weeks paid if records are sparse
-                            $effectiveWeeks = max(count($paidWeeks), (int) floor($s->total_terbayar / 20000));
+                            $effectiveWeeks = max(count($paidWeeks), (int) floor($s->total_terbayar / 5000));
                         @endphp
                         <tr class="hover:bg-surface-container-low/40 transition-colors">
                             <td class="py-3 px-4 text-center font-label-sm text-outline">{{ $idx + 1 }}</td>
@@ -67,7 +67,6 @@
                                     </div>
                                     <div>
                                         <span class="font-label-lg text-label-lg text-on-surface font-semibold block">{{ $s->nama }}</span>
-                                        <span class="font-body-sm text-[11px] text-on-surface-variant">NIS: {{ $s->nis }}</span>
                                     </div>
                                 </div>
                             </td>
@@ -84,7 +83,7 @@
                                     @endif
                                 </td>
                             @endfor
-                            <td class="py-3 px-4 text-right font-label-lg font-bold tabular-nums {{ $s->total_terbayar >= 80000 ? 'text-secondary' : 'text-on-surface' }}">
+                            <td class="py-3 px-4 text-right font-label-lg font-bold tabular-nums {{ $s->total_terbayar >= 20000 ? 'text-secondary' : 'text-on-surface' }}">
                                 Rp {{ number_format($s->total_terbayar, 0, ',', '.') }}
                             </td>
                             <td class="py-3 px-4 text-center">
@@ -166,7 +165,7 @@
                 <label class="block font-label-md text-label-md text-on-surface mb-1">Pilih Siswa *</label>
                 <select id="payment-siswa-id" name="siswa_id" required class="w-full h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:outline-none focus:border-primary-container text-body-md text-on-surface">
                     @foreach($siswas as $s)
-                        <option value="{{ $s->id }}">{{ $s->nama }} (NIS: {{ $s->nis }}) - Sisa: Rp {{ number_format($s->sisa_kas, 0, ',', '.') }}</option>
+                        <option value="{{ $s->id }}">{{ $s->nama }} - Sisa: Rp {{ number_format($s->sisa_kas, 0, ',', '.') }}</option>
                     @endforeach
                 </select>
             </div>
@@ -188,7 +187,7 @@
             </div>
             <div>
                 <label class="block font-label-md text-label-md text-on-surface mb-1">Nominal Pembayaran (Rp) *</label>
-                <input type="number" id="payment-nominal" name="nominal" value="20000" min="1000" step="1000" required class="w-full h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:outline-none focus:border-primary-container text-body-md text-on-surface font-semibold"/>
+                <input type="number" id="payment-nominal" name="nominal" value="5000" min="1000" step="1000" required class="w-full h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:outline-none focus:border-primary-container text-body-md text-on-surface font-semibold"/>
             </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
@@ -232,7 +231,7 @@ function openPaymentModalForStudent(siswaId, nama) {
 function quickPay(siswaId, nama, minggu) {
     document.getElementById('payment-siswa-id').value = siswaId;
     document.getElementById('payment-minggu').value = minggu;
-    document.getElementById('payment-nominal').value = 20000;
+    document.getElementById('payment-nominal').value = 5000;
     openPaymentModal();
 }
 </script>

@@ -36,11 +36,6 @@
                     </div>
                     <div class="flex flex-col min-w-0">
                         <span class="text-base font-bold text-slate-900 tracking-tight leading-none">Kas Kelas</span>
-                        <div class="mt-1">
-                            <span class="inline-block bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-blue-100 leading-tight">
-                                PORTAL SISWA XII IPA 2
-                            </span>
-                        </div>
                     </div>
                 </a>
                 <button id="mobile-sidebar-close" class="lg:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors" type="button" aria-label="Tutup Menu">
@@ -64,13 +59,13 @@
                     <span>Riwayat & Kuitansi</span>
                 </a>
 
-                <!-- Secondary Link: Admin Panel if authenticated as admin -->
+                <!-- Secondary Link if authenticated as admin -->
                 @if(auth()->check() && auth()->user()->role === 'admin')
                     <div class="my-2 border-t border-slate-100"></div>
                     <a href="{{ route('admin.dashboard') }}" 
                        class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-blue-700 bg-blue-50/60 hover:bg-blue-100/70 border border-blue-100/80 transition-colors">
-                        <span class="material-symbols-outlined text-[19px] text-blue-600">admin_panel_settings</span>
-                        <span>Kembali ke Admin Panel</span>
+                        <span class="material-symbols-outlined text-[19px] text-blue-600">arrow_back</span>
+                        <span>Kembali</span>
                     </a>
                 @endif
             </nav>
@@ -90,7 +85,7 @@
                 <span class="text-slate-400 text-[11px] font-medium">Real-time</span>
             </div>
 
-            <!-- Auth Action -->
+            <!-- Auth Action (hanya tampil jika sudah login) -->
             @if(auth()->check() && auth()->user()->role === 'admin')
                 <form action="{{ route('logout') }}" method="POST" class="w-full">
                     @csrf
@@ -99,11 +94,6 @@
                         <span>Keluar Akun Admin</span>
                     </button>
                 </form>
-            @else
-                <a href="{{ route('login') }}" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors">
-                    <span class="material-symbols-outlined text-[20px] text-blue-600">lock</span>
-                    <span>Login Bendahara</span>
-                </a>
             @endif
         </div>
     </aside>
@@ -119,7 +109,7 @@
                         <span class="material-symbols-outlined text-[22px]">menu</span>
                     </button>
                     <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
-                        Portal Transparansi Kas Kelas
+                        Kas Kelas
                     </h1>
                 </div>
 
@@ -127,8 +117,8 @@
                 @if(auth()->check() && auth()->user()->role === 'admin')
                     <div class="flex items-center gap-3 shrink-0">
                         <a href="{{ route('admin.dashboard') }}" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold border border-blue-200 transition-colors">
-                            <span class="material-symbols-outlined text-[17px]">admin_panel_settings</span>
-                            <span>Panel Admin</span>
+                            <span class="material-symbols-outlined text-[17px]">arrow_back</span>
+                            <span>Kembali</span>
                         </a>
                         <div class="flex items-center gap-2.5 pl-2">
                             <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-800 ring-2 ring-blue-200 flex items-center justify-center font-bold text-xs uppercase shrink-0">
@@ -146,13 +136,11 @@
                     </div>
                 @else
                     <div class="flex items-center gap-2.5 shrink-0">
-                        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-xs font-medium">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            Portal Publik Siswa
-                        </span>
-                        <a href="{{ route('login') }}" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition-colors">
-                            <span class="material-symbols-outlined text-[16px]">lock</span>
-                            <span>Login Bendahara</span>
+                        <a href="{{ route('login') }}" 
+                           class="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-xs transition-all active:scale-95" 
+                           title="Login" 
+                           aria-label="Login">
+                            <span class="material-symbols-outlined text-[18px]">lock</span>
                         </a>
                     </div>
                 @endif
